@@ -1,0 +1,7 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- The Activity uses StarterTheme (Compose) internally; this XML theme
+         is just for the splash window before Compose composes. -->
+    <style name="Theme.Starter" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowSplashScreenBackground" tools:targetApi="31">@android:color/white</item>
+    </style>
+</resources>
