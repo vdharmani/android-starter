@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.vdharmani.starter.feature.auth.presentation.forgot.ForgotPasswordScreen
 import com.vdharmani.starter.feature.auth.presentation.login.LoginScreen
 
 /**
@@ -35,7 +36,13 @@ fun AppNavGraph() {
                     }
                 },
                 onGoSignup = { /* navController.navigate(Routes.Signup) — Phase 2 */ },
-                onGoForgot = { /* navController.navigate(Routes.Forgot) — Phase 2 */ },
+                onGoForgot = { navController.navigate(Routes.Forgot) },
+            )
+        }
+
+        composable(Routes.Forgot) {
+            ForgotPasswordScreen(
+                onBackToLogin = { navController.popBackStack() },
             )
         }
 
@@ -50,5 +57,6 @@ fun AppNavGraph() {
 
 private object Routes {
     const val Login = "login"
+    const val Forgot = "forgot"
     const val Home = "home"
 }
