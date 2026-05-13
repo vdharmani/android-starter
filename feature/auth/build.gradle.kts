@@ -25,6 +25,14 @@ android {
     buildFeatures {
         compose = true
     }
+
+    testOptions {
+        unitTests {
+            // Required for Robolectric to find AndroidManifest + resources
+            // when running Compose UI tests as JVM unit tests.
+            isIncludeAndroidResources = true
+        }
+    }
 }
 
 kotlin {
@@ -60,4 +68,15 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
     ksp(libs.hilt.compiler)
+
+    // -- Tests (JVM, no emulator needed) ------------------------------------
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.okhttp.mockwebserver)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.compose.ui.test.junit4)
+    testImplementation(libs.compose.ui.test.manifest)
+    // Repo test needs to spin up real Retrofit against MockWebServer.
+    testImplementation(libs.retrofit)
+    testImplementation(libs.retrofit.kotlinx.serialization)
 }
