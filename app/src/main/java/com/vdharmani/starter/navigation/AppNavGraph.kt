@@ -15,7 +15,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.vdharmani.starter.R
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -119,15 +121,23 @@ private fun HomeScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text("You're signed in 🎉", style = MaterialTheme.typography.headlineMedium)
+        Text(stringResource(R.string.home_signed_in), style = MaterialTheme.typography.headlineMedium)
         Spacer(Modifier.height(32.dp))
-        Button(onClick = onProfile, modifier = Modifier.fillMaxWidth()) { Text("Profile") }
+        Button(onClick = onProfile, modifier = Modifier.fillMaxWidth()) {
+            Text(stringResource(R.string.home_profile))
+        }
         Spacer(Modifier.height(12.dp))
-        Button(onClick = onPremium, modifier = Modifier.fillMaxWidth()) { Text("Premium") }
+        Button(onClick = onPremium, modifier = Modifier.fillMaxWidth()) {
+            Text(stringResource(R.string.home_premium))
+        }
         Spacer(Modifier.height(12.dp))
-        OutlinedButton(onClick = onTerms, modifier = Modifier.fillMaxWidth()) { Text("Terms") }
+        OutlinedButton(onClick = onTerms, modifier = Modifier.fillMaxWidth()) {
+            Text(stringResource(R.string.home_terms))
+        }
         Spacer(Modifier.height(12.dp))
-        OutlinedButton(onClick = onPrivacy, modifier = Modifier.fillMaxWidth()) { Text("Privacy") }
+        OutlinedButton(onClick = onPrivacy, modifier = Modifier.fillMaxWidth()) {
+            Text(stringResource(R.string.home_privacy))
+        }
     }
 }
 

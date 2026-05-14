@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Starter</string>
+
+    <!-- Home (post-auth landing hub) -->
+    <string name="home_signed_in">You\'re signed in 🎉</string>
+    <string name="home_profile">Profile</string>
+    <string name="home_premium">Premium</string>
+    <string name="home_terms">Terms</string>
+    <string name="home_privacy">Privacy</string>
 </resources>

@@ -24,8 +24,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.vdharmani.starter.feature.premium.R
 import com.vdharmani.subscription.compose.ComposeSubscription
 import com.vdharmani.subscription.model.ProductType
 import kotlinx.coroutines.launch
@@ -67,21 +69,24 @@ fun PremiumScreen(
             verticalArrangement = Arrangement.Center,
         ) {
             Text(
-                text = if (isPremium) "You're a Premium member 🎉" else "Go Premium",
+                text = stringResource(
+                    if (isPremium) R.string.premium_title_member else R.string.premium_title_upsell,
+                ),
                 style = MaterialTheme.typography.headlineMedium,
                 textAlign = TextAlign.Center,
             )
             Spacer(Modifier.height(8.dp))
             Text(
-                text = if (isPremium) {
-                    "Thanks for your support — all features are unlocked."
-                } else {
-                    "Unlock all features with a monthly subscription."
-                },
+                text = stringResource(
+                    if (isPremium) R.string.premium_subtitle_member else R.string.premium_subtitle_upsell,
+                ),
                 style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
             )
             Spacer(Modifier.height(32.dp))
+
+            val purchaseFailedMsg = stringResource(R.string.premium_purchase_failed)
+            val restoreFailedMsg = stringResource(R.string.premium_restore_failed)
 
             if (!isPremium) {
                 Button(
@@ -90,13 +95,13 @@ fun PremiumScreen(
                             sub.purchase(PREMIUM_PRODUCT_ID, ProductType.SUBS)
                                 .onFailure { e ->
                                     if (e !is com.vdharmani.subscription.PurchaseCancelledException) {
-                                        snackbarHostState.showSnackbar(e.message ?: "Purchase failed")
+                                        snackbarHostState.showSnackbar(e.message ?: purchaseFailedMsg)
                                     }
                                 }
                         }
                     },
                     modifier = Modifier.fillMaxWidth(),
-                ) { Text("Subscribe — \$4.99/mo") }
+                ) { Text(stringResource(R.string.premium_subscribe_cta)) }
                 Spacer(Modifier.height(12.dp))
             }
 
@@ -104,15 +109,15 @@ fun PremiumScreen(
                 onClick = {
                     scope.launch {
                         sub.restore().onFailure { e ->
-                            snackbarHostState.showSnackbar(e.message ?: "Restore failed")
+                            snackbarHostState.showSnackbar(e.message ?: restoreFailedMsg)
                         }
                     }
                 },
                 modifier = Modifier.fillMaxWidth(),
-            ) { Text("Restore purchases") }
+            ) { Text(stringResource(R.string.premium_restore)) }
 
             Spacer(Modifier.height(24.dp))
-            TextButton(onClick = onBack) { Text("Back") }
+            TextButton(onClick = onBack) { Text(stringResource(R.string.premium_back)) }
         }
     }
 }

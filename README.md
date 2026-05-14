@@ -89,19 +89,21 @@ Junior reads `feature/auth/` top-to-bottom and can build any other feature
 
 ## Renaming for your project
 
+Use the bundled `rename.sh` to rename the package + app ID in one shot:
+
 ```bash
 git clone https://github.com/vdharmani/sampleproject-android my-app
 cd my-app
 rm -rf .git && git init                       # fresh history
-# Find/replace `com.vdharmani.starter` → `com.myteam.myapp` (in Studio: 
-# Refactor → Rename Package, or via sed)
-# Update `applicationId` in app/build.gradle.kts and `rootProject.name` 
-# in settings.gradle.kts
-# Update BASE_URL in core/network/build.gradle.kts (buildConfigField)
+./rename.sh com.myteam.myapp "My App"         # new package id, new app name
+# Then update BASE_URL in core/network/build.gradle.kts (buildConfigField)
 ./gradlew assembleDebug
 ```
 
-A `rename.sh` script automating this is on the roadmap.
+Prefer to do it by hand? In Studio: **Refactor → Rename Package** on
+`com.vdharmani.starter`, then update `applicationId` in `app/build.gradle.kts`,
+`rootProject.name` in `settings.gradle.kts`, and `app_name` in
+`app/src/main/res/values/strings.xml`.
 
 ---
 

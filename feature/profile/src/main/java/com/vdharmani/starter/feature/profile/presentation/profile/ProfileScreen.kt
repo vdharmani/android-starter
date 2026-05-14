@@ -35,6 +35,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -42,6 +43,7 @@ import coil.compose.AsyncImage
 import com.vdharmani.imagepicker.ImagePickerConfig
 import com.vdharmani.imagepicker.compose.composeImagePicker
 import com.vdharmani.starter.core.ui.components.AppLoader
+import com.vdharmani.starter.feature.profile.R
 
 @Composable
 fun ProfileScreen(
@@ -87,15 +89,19 @@ fun ProfileScreen(
                 AvatarBubble(uri = state.localAvatarUri)
                 Spacer(Modifier.height(16.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    OutlinedButton(onClick = { picker.captureImage() }) { Text("Camera") }
-                    OutlinedButton(onClick = { picker.uploadImage() }) { Text("Gallery") }
+                    OutlinedButton(onClick = { picker.captureImage() }) {
+                        Text(stringResource(R.string.profile_avatar_camera))
+                    }
+                    OutlinedButton(onClick = { picker.uploadImage() }) {
+                        Text(stringResource(R.string.profile_avatar_gallery))
+                    }
                 }
                 Spacer(Modifier.height(32.dp))
 
                 state.user?.let { user ->
                     Text(user.name, style = MaterialTheme.typography.titleLarge)
                     Text(user.email, style = MaterialTheme.typography.bodyMedium)
-                } ?: Text("Loading…", style = MaterialTheme.typography.bodyMedium)
+                } ?: Text(stringResource(R.string.profile_loading), style = MaterialTheme.typography.bodyMedium)
 
                 Spacer(Modifier.height(32.dp))
                 HorizontalDivider()
@@ -104,14 +110,14 @@ fun ProfileScreen(
                 OutlinedButton(
                     onClick = onChangePassword,
                     modifier = Modifier.fillMaxWidth(),
-                ) { Text("Change password") }
+                ) { Text(stringResource(R.string.profile_change_password)) }
                 Spacer(Modifier.height(12.dp))
 
                 OutlinedButton(
                     onClick = { viewModel.handle(ProfileIntent.Logout) },
                     modifier = Modifier.fillMaxWidth(),
                     enabled = !state.isLoggingOut,
-                ) { Text("Log out") }
+                ) { Text(stringResource(R.string.profile_log_out)) }
                 Spacer(Modifier.height(12.dp))
 
                 Button(
@@ -121,7 +127,7 @@ fun ProfileScreen(
                         containerColor = MaterialTheme.colorScheme.error,
                         contentColor = MaterialTheme.colorScheme.onError,
                     ),
-                ) { Text("Delete account") }
+                ) { Text(stringResource(R.string.profile_delete_account)) }
             }
             if (state.isLoggingOut) AppLoader()
         }
@@ -143,7 +149,7 @@ private fun AvatarBubble(uri: Uri?) {
         } else {
             AsyncImage(
                 model = uri,
-                contentDescription = "Profile photo",
+                contentDescription = stringResource(R.string.profile_avatar_content_description),
                 modifier = Modifier.size(120.dp),
                 contentScale = ContentScale.Crop,
             )

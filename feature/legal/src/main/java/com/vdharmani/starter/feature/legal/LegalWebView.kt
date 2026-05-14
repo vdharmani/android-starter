@@ -24,6 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.viewinterop.AndroidView
 
 /**
@@ -48,7 +49,10 @@ fun LegalWebView(
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         // Plain ASCII back arrow keeps the dep surface minimal.
-                        Text("‹", style = androidx.compose.material3.MaterialTheme.typography.headlineMedium)
+                        Text(
+                            text = "‹",
+                            style = androidx.compose.material3.MaterialTheme.typography.headlineMedium,
+                        )
                     }
                 },
             )

@@ -1,0 +1,8 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Dark-mode override of the splash window theme. The Activity uses
+         StarterTheme (Compose) once Compose composes, which honours system
+         dark mode via dynamicColorScheme / darkColorScheme. -->
+    <style name="Theme.Starter" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowSplashScreenBackground" tools:targetApi="31">@android:color/black</item>
+    </style>
+</resources>
